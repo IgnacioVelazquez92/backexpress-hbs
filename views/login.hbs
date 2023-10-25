@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="d-flex justify-content-evenly align-items-center py-5">
+
+    <div class="py-2">
+      <img class= "img-fluid" src="assets/img/dog-form.png" alt="">
+    </div>
+    <div class="border rounded p-5">
+      <h1 class="mb-2">Bienvenido a Polaris 3D</h1>
+      <form id="loginForm">
+
+        <div class="mb-3">
+          <label for="logEmail" class="form-label">Correo Electrónico</label>
+          <input
+            type="email"
+            class="form-control"
+            id="logEmail"
+            name="email"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="logPassword" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="logPassword"
+            name="password"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          return="false"
+        >Iniciar Sesión</button>
+      </form>
+
+      <span>No tienes cuenta? <a href="/iniciar-sesion">Registrarse</a></span>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="/js/login.js"></script>

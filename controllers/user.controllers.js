@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
+const { transporter } = require("../helpers/nodemailer");
 
 const {
   crearUsuarios,
@@ -38,20 +39,37 @@ const getUserByMail = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
+  const userData = req.body;
+  console.log(userData);
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty())
       return res.status(400).json({ errors: errors.array() });
     const saltRound = bcrypt.genSaltSync(10);
-    const userData = req.body;
+
     const email = userData.email;
     userData.password = bcrypt.hashSync(userData.password, saltRound);
     const newUser = await crearUsuarios(userData);
 
-    res.status(201).json({
-      msg: "Te registraste exitosamente, ya puedes iniciar sesión!👋",
-      newUser,
+    const mailOptions = {
+      from: process.env.EMAIL_USER, // Tu dirección de correo
+      to: email, // Dirección del destinatario
+      subject: "Bienvenido a polaris 3D",
+      text: `Bienvenido ${userData.name} nuestra página de eccomerce, atte equipo de desarrollo`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log("Error al enviar el correo:", error);
+        res.send("Error al enviar el correo");
+      }
     });
+
+    // res.status(201).json({
+    //   msg: "Te registraste exitosamente, ya puedes iniciar sesión!👋",
+    //   newUser,
+    // });
+    res.redirect("/login");
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

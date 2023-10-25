@@ -1,12 +1,8 @@
-//REGISTRO
-console.log("soy el registro");
-
-const formulario = document.querySelector("form");
+const formulario = document.querySelector("#registration-form");
 
 formulario.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  // Captura los valores de los campos del formulario
   const name = document.querySelector("#name").value;
   const lastName = document.querySelector("#lastName").value;
   const email = document.querySelector("#email").value;
@@ -19,8 +15,11 @@ formulario.addEventListener("submit", async (event) => {
     password: password,
   };
 
+  console.log(userData);
+
   try {
-    const response = await fetch("/create-user", {
+    console.log("Enviando solicitud...");
+    const response = await fetch("/user/create-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

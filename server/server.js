@@ -27,7 +27,7 @@ app.set("view engine", "hbs");
 //set del path de las vistas
 app.set("views", path.join(__dirname, "../views"));
 
-//set del path de los aprciales
+//set del path de los parciales
 hbs.registerPartials(path.join(__dirname, "../views/partials"));
 
 //Rutas
@@ -46,6 +46,13 @@ app.get("/iniciar-sesion", (req, res) => {
     title: "registro",
   });
 });
+
+app.get("/login", (req, res) => {
+  res.render("login", {
+    title: "iniciar sesion",
+  });
+});
+
 app.listen(PORT, () => {
-  console.log(`servidor corriendo en https://localhost:${PORT}`);
+  console.log(`servidor corriendo en http://localhost:${PORT}`);
 });
