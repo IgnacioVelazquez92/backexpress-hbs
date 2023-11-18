@@ -110,4 +110,10 @@ route.patch("/isAdmin-user/:id/:isAdmin", isAdministrator);
 
 route.delete("/delete-user/:id", deleteUser);
 
+route.get("/iniciar-sesion", (req, res) => {
+  res.render("registro", {
+    title: "registro",
+  });
+});
+
 module.exports = route;

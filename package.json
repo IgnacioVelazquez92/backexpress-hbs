@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node --watch server/server"
+    "server": "node --watch server/server",
+    "start": "nodemon server/server.js"
   },
   "engines": {
     "node": ">=14 <15"
@@ -17,6 +18,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
@@ -25,5 +28,8 @@
     "nodemailer": "^6.9.7",
     "path": "^0.12.7",
     "sweetalert2": "^11.7.32"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

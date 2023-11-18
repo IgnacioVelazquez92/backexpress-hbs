@@ -1,5 +1,22 @@
   <h1 class="bg-primary h1">
-   helloWorld
+    Bienvenido a Polaris 3D
    
   </h1>
+
+<h1>{{resp.msg}}</h1>
+
+
+
+
+
+  {{#if resp.userData}}
+
+    <p>Bienvenido, {{resp.userData.name}} {{resp.userData.lastName}}.</p>
+  <p>Email: {{resp.userData.email}}</p>
+  <p>Admin: {{resp.userData.isAdmin}}</p>
+   
+  {{else}}
+    <p>No eres un administrador.</p>
+  {{/if}}
   
+

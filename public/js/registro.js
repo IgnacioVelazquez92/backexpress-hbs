@@ -15,10 +15,7 @@ formulario.addEventListener("submit", async (event) => {
     password: password,
   };
 
-  console.log(userData);
-
   try {
-    console.log("Enviando solicitud...");
     const response = await fetch("/user/create-user", {
       method: "POST",
       headers: {
@@ -26,13 +23,26 @@ formulario.addEventListener("submit", async (event) => {
       },
       body: JSON.stringify(userData),
     });
+    const responseData = await response.json();
 
     if (response.ok) {
-      alert("Usuario registrado con éxito");
+      Swal.fire({
+        title: "Inicio de sesión exitoso",
+        icon: "success",
+        text: responseData?.msg,
+      });
     } else {
-      alert("Error al registrar usuario");
+      Swal.fire({
+        title: "Error de inicio de registro",
+        icon: "error",
+        text: responseData.errors[0].msg,
+      });
     }
   } catch (error) {
-    console.error("Error en la solicitud:", error);
+    Swal.fire({
+      title: "Error de inicio de sesión",
+      icon: "error",
+      text: responseData?.errors[0]?.msg || "error de servidor",
+    });
   }
 });
