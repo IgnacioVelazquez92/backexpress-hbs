@@ -1,22 +1,39 @@
-  <h1 class="bg-primary h1">
-    Bienvenido a Polaris 3D
-   
-  </h1>
+<div class="container">
+  <div class="d-none">{{user.isAdmin}}</div>
 
-<h1>{{resp.msg}}</h1>
-
-
-
-
-
-  {{#if resp.userData}}
-
-    <p>Bienvenido, {{resp.userData.name}} {{resp.userData.lastName}}.</p>
-  <p>Email: {{resp.userData.email}}</p>
-  <p>Admin: {{resp.userData.isAdmin}}</p>
-   
-  {{else}}
-    <p>No eres un administrador.</p>
-  {{/if}}
-  
-
+  <div class="row">
+    {{#each resp}}
+      {{#if ../user.isAdmin}}
+        <!-- Muestra todos los productos al administrador -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100" style="width: 18rem;">
+            <img src="{{this.img}}" class="card-img-top" alt="{{this.title}}">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{this.title}}</h5>
+              <p class="card-text overflow-auto">{{this.description}}</p>
+              <p class="card-text">Precio: ${{this.price}}</p>
+              <a href="/edit-products/{{this._id}}" class="btn btn-primary my-2">Editar</a>
+              <a href="/delete-products/{{this._id}}" class="btn btn-danger">Eliminar</a>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+      {{else}}
+        {{#if this.inStock}}
+          <!-- Muestra solo los productos en stock para los clientes -->
+          <div class="col-md-4 mb-4">
+            <div class="card h-100" style="width: 18rem;">
+              <img src="{{this.img}}" class="card-img-top" alt="{{this.title}}">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{this.title}}</h5>
+                <p class="card-text overflow-auto">{{this.description}}</p>
+                <p class="card-text">Precio: ${{this.price}}</p>
+                <a href="#" class="btn btn-primary">Comprar</a>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+    {{/each}}
+  </div>
+</div>

@@ -10,10 +10,13 @@ const {
 
 const getAllProducts = async (req, res) => {
   try {
+    const user = req.session.userData;
+    console.log("usuario :", user);
     const resp = await getAllProductService();
+    // console.log(resp);
     if (resp.lenght === 0)
       return res.status(404).json("No hay productos en la base de datos");
-    res.status(200).json(resp);
+    res.render("index", { title: "Polaris 3D", resp, user: user });
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -37,10 +40,7 @@ const createProducts = async (req, res) => {
   try {
     const productData = req.body;
     const resp = await createProductService(productData);
-    res.status(201).json({
-      status: "ok",
-      message: "Producto agregado con éxito",
-    });
+    res.redirect("/");
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -49,10 +49,33 @@ const createProducts = async (req, res) => {
 const editProducts = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log("el id es :", id);
     const productData = req.body;
+    console.log("los nuevos datos son:", productData);
+
+    // Manejar el caso cuando inStock no está presente en req.body
+    if (!("inStock" in productData)) {
+      productData.inStock = false; // Asignar false si no está presente
+    }
+
     const resp = await editProductService(id, productData);
     if (!resp) return res.status(404).json("producto no encontrado");
-    res.status(201).json(resp);
+    res.redirect("/");
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+const renderEditProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const resp = await getProductByIdService(id);
+    // console.log(resp);
+    if (!resp)
+      return res
+        .status(404)
+        .json(`El producto con el id: ${id} no se ha encontrado`);
+    res.render("editProduct", { resp });
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -66,31 +89,6 @@ const deleteProducts = async (req, res) => {
     res.status(200).json("producto eliminado exitosamente");
   } catch (error) {
     res.status(500).json(error.message);
-  }
-};
-
-const disableProduct = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { disable } = req.body;
-    const resp = await editProductService(id, { disable });
-    if (!resp) return res.status(404).json("Producto deshabilitado");
-    res.status(200).json(resp);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-};
-
-const destacarProducto = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { destacado } = req.body;
-    const resp = await editProductService(id, { destacado });
-    if (!resp) return res.status(404).json("no se pudo destacar el articulo");
-    res.status(200).json(resp);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error al destacar el producto");
   }
 };
 
@@ -115,7 +113,6 @@ module.exports = {
   createProducts,
   editProducts,
   deleteProducts,
-  disableProduct,
-  destacarProducto,
   getproductByName,
+  renderEditProduct,
 };

@@ -23,12 +23,12 @@ const prductSchema = Schema({
 
   price: {
     type: Number,
-    default: false,
+    required: [true, "Este campo es requerido"],
   },
 
-  disabled: {
+  inStock: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 

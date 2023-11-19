@@ -34,6 +34,7 @@ const login = async (req, res) => {
       lastName: searchMail.lastName,
       email: searchMail.email,
       isAdmin: searchMail.isAdmin,
+      token,
     };
 
     console.log(req.session.userData);

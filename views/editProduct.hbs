@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <h1 class="text-center mb-4">Editar Producto</h1>
+      <form id="editProductForm" method="POST" action="/edit-products/{{resp._id}}">
+        <div class="mb-3">
+          <label for="title" class="form-label">Título</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            required
+            value="{{resp.title}}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Categoría</label>
+          <input
+            type="text"
+            class="form-control"
+            id="category"
+            name="category"
+            value="{{resp.category}}"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripción</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="4"
+            required
+          >{{resp.description}}</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="img" class="form-label">URL de la Imagen</label>
+          <input
+            type="text"
+            class="form-control"
+            id="img"
+            name="img"
+            value="{{resp.img}}"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Precio</label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            name="price"
+            value="{{resp.price}}"
+            required
+          />
+        </div>
+        <!-- Switch para indicar si está en stock -->
+        <div class="mb-3 form-check form-switch">
+        <input type="hidden" name="inStock" value="false">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="inStock"
+          name="inStock"
+          {{#if resp.inStock}}
+            checked
+          {{/if}}
+/>
+          <label class="form-check-label" for="inStock">¿En stock?</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </form>
+    </div>
+  </div>
+</div>

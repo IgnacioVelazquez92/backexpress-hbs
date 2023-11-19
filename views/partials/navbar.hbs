@@ -7,12 +7,39 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="./">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="/">Inicio</a>
         </li>
+
+        <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
+          {{#if user}}
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Perfil
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Cuenta</a></li>
+              <li><a class="dropdown-item" href="#">Configuraciones</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+            </ul>
+            {{else}}
+          <!-- Navbar para usuarios no autenticados -->
+          <a class="nav-link" href="/login">Iniciar sesión</a>
+
+          {{/if}}
+
+        </li>
+        {{#if user.isAdmin}}
         <li class="nav-item">
-          <a class="nav-link" href="./login">Iniciar sesión</a>
+          <a class="nav-link" href="/add">Productos</a>
         </li>
-        {{> logged user=userData }}
+          {{/if}}
+
+          {{#if user.isAdmin}}
+        <li class="nav-item">
+          <a class="nav-link" href="/user/">Usuarios</a>
+        </li>
+          {{/if}}
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

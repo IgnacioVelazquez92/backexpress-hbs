@@ -6,25 +6,29 @@ const {
   createProducts,
   editProducts,
   deleteProducts,
-  disableProduct,
-  destacarProducto,
   getproductByName,
+  renderEditProduct,
 } = require("../controllers/product.controller");
 
-route.get("/get-all-products", getAllProducts);
+route.get("/", getAllProducts);
 
 route.get("/get-by-product/:nombre", getproductByName);
 
 route.get("/get-by-id/:id", getProductById);
 
 route.post("/create-products", createProducts);
+route.get("/add", (req, res) => {
+  const logueado = req.session;
+  console.log(logueado);
 
-route.patch("/edit-products/:id", editProducts);
+  res.render("addProducts", {
+    title: "Añadir Producto",
+  });
+});
 
-route.patch("/disable-products/:id", disableProduct);
+route.post("/edit-products/:id", editProducts);
+route.get("/edit-products/:id", renderEditProduct);
 
 route.delete("/delete-products/:id", deleteProducts);
-
-route.patch("/destacar-producto/:id", destacarProducto);
 
 module.exports = route;
