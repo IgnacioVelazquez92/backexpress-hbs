@@ -43,9 +43,9 @@ app.set("views", path.join(__dirname, "../views"));
 // Middleware para cargar información de sesión en cada solicitud
 app.use((req, res, next) => {
   res.locals.user = req.session.userData || null; // Asegurarse de asignar un valor por defecto si no hay sesión
-  console.log(res.locals.user);
   next();
 });
+
 //Rutas
 app.use("/user", userRoutes);
 app.use("/login", loginAuth);
@@ -58,7 +58,6 @@ app.get("/logout", (req, res) => {
       console.error(err);
       return res.status(500).send("Error al cerrar sesión");
     }
-
     res.redirect("/"); // Redirigir a la página de inicio de sesión, por ejemplo
   });
 });

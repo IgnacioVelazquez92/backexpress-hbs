@@ -11,7 +11,6 @@ const {
 const getAllProducts = async (req, res) => {
   try {
     const user = req.session.userData;
-    console.log("usuario :", user);
     const resp = await getAllProductService();
     // console.log(resp);
     if (resp.lenght === 0)
@@ -51,17 +50,24 @@ const editProducts = async (req, res) => {
     const { id } = req.params;
     console.log("el id es :", id);
     const productData = req.body;
-    console.log("los nuevos datos son:", productData);
+    console.log("los que llegan:", productData, "termina de mostrar");
 
-    // Manejar el caso cuando inStock no está presente en req.body
-    if (!("inStock" in productData)) {
-      productData.inStock = false; // Asignar false si no está presente
+    if(productData.inStock=="on"){
+      productData.inStock=true
     }
+    if(!productData.inStock){
+      productData.inStock=false
+    }
+    console.log("los nuevos datos son:", productData, "termina de mostrar");
+
+    console.log("el check viene como: " + productData.inStock);
+
 
     const resp = await editProductService(id, productData);
     if (!resp) return res.status(404).json("producto no encontrado");
     res.redirect("/");
   } catch (error) {
+    console.log(error.message);
     res.status(500).json(error.message);
   }
 };
@@ -77,6 +83,7 @@ const renderEditProduct = async (req, res) => {
         .json(`El producto con el id: ${id} no se ha encontrado`);
     res.render("editProduct", { resp });
   } catch (error) {
+    console.log(error.message);
     res.status(500).json(error.message);
   }
 };
