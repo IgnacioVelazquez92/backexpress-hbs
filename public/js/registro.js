@@ -24,18 +24,23 @@ formulario.addEventListener("submit", async (event) => {
       body: JSON.stringify(userData),
     });
     const responseData = await response.json();
+    console.log(responseData)
 
     if (response.ok) {
       Swal.fire({
         title: "Inicio de sesión exitoso",
         icon: "success",
         text: responseData?.msg,
+      }).then(() => {
+        // Redirige a la página principal o realiza alguna acción necesaria después del inicio de sesión
+        window.location.href = "/login"; // Puedes cambiar la URL según tus necesidades
       });
+      ;
     } else {
       Swal.fire({
         title: "Error de inicio de registro",
         icon: "error",
-        text: responseData.errors[0].msg,
+        text: responseData?.errors[0].msg,
       });
     }
   } catch (error) {

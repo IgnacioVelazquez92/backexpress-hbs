@@ -65,11 +65,10 @@ const createUser = async (req, res) => {
       }
     });
 
-    // res.status(201).json({
-    //   msg: "Te registraste exitosamente, ya puedes iniciar sesión!👋",
-    //   newUser,
-    // });
-    res.redirect("/login");
+    res.status(201).json({
+      msg: "Te registraste exitosamente, ya puedes iniciar sesión!👋",
+      newUser,
+    });
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

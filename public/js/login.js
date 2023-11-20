@@ -19,10 +19,9 @@ loginForm.addEventListener("submit", async (event) => {
       },
       body: JSON.stringify(userData),
     });
-    console.log(response);
-    console.log(response.status); // Añade esta línea
+   
     const responseData = await response.json();
-    console.log(responseData);
+
 
     if (response.ok) {
       Swal.fire({
