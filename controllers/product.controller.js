@@ -1,4 +1,4 @@
-const Product = require("../models/product.models");
+
 const {
   getAllProductService,
   getProductByIdService,

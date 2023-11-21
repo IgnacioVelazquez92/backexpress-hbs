@@ -21,9 +21,10 @@ const deleteProductService = async (id) => {
   return Product.findByIdAndDelete(id);
 };
 
+
 const obtenerProductoPorNombre = async (title) => {
-  console.log("en el service llega :",title);
-  const regex = new RegExp(`^${title}`, "i");
+  console.log("en el service llega:", title);
+  const regex = new RegExp(`${title}`, "i");
   const productos = await Product.find({ title: { $regex: regex } }).lean();
   return productos;
 };
