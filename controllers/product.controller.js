@@ -93,7 +93,7 @@ const deleteProducts = async (req, res) => {
     const { id } = req.params;
     const resp = await deleteProductService(id);
     if (!resp) return res.status(404).json("Producto no encontrado");
-    res.status(200).json("producto eliminado exitosamente");
+    res.redirect("/")
   } catch (error) {
     res.status(500).json(error.message);
   }

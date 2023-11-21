@@ -29,6 +29,6 @@ route.get("/add", (req, res) => {
 route.post("/edit-products/:id", editProducts);
 route.get("/edit-products/:id", renderEditProduct);
 
-route.delete("/delete-products/:id", deleteProducts);
+route.get("/delete-products/:id", deleteProducts);
 
 module.exports = route;
