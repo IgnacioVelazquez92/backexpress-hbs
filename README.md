@@ -45,7 +45,7 @@ Pasos o instrucciones para utilizar o probar el proyecto una vez instalado. Por 
 
 ## Contacto
 
-i tienes preguntas o comentarios sobre el proyecto, no dudes en contactarme a través de mis redes sociales:
+si tienes preguntas o comentarios sobre el proyecto, no dudes en contactarme a través de mis redes sociales:
 
 - Twitter: [MiUsuarioTwitter](https://twitter.com/Ignacio_V10)
 - LinkedIn: [MiPerfilLinkedIn](https://www.linkedin.com/in/omar-ignacio-velazquez-44499414a/)
