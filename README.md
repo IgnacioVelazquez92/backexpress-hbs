@@ -35,13 +35,13 @@ Instrucciones para instalar o ejecutar el proyecto en un entorno local. Por ejem
 Pasos o instrucciones para utilizar o probar el proyecto una vez instalado. 
 
 1. Ejecuta el comando `npm start`
-2. Necesitas configurar tus propias variables de entorno.
-      PORT=8080
-      URL_DB= url mongo db
-      SECRET=key de JWT
-      EMAIL_PASS= clave para nodemailer y tu servicio de email
-      EMAIL_USER= correo eléctronico
-      SESSION_SECRET= clave para express sessión
+2. Necesitas configurar tus propias variables de entorno:
+    - `PORT=8080`
+    - `URL_DB= url mongo db`
+    - `SECRET=key de JWT`
+    - `EMAIL_PASS= clave para nodemailer y tu servicio de email`
+    - `EMAIL_USER= correo eléctronico`
+    - `SESSION_SECRET= clave para express sessión`
 3. Abre tu navegador y ve a `http://localhost:8080`
 
 ## Contacto

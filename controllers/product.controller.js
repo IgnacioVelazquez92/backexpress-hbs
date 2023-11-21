@@ -101,14 +101,19 @@ const deleteProducts = async (req, res) => {
 
 const getproductByName = async (req, res) => {
   try {
-    const { nombre } = req.params;
-    console.log(nombre);
+    console.log(req.body);
+    const { nombre } = req.body;
+    const user = req.session.userData;
+    console.log("se guarda",nombre);
     const resp = await obtenerProductoPorNombre(nombre);
+
+    console.log("se encontro :",resp);
+
     if (!resp) {
       res.status(404).json("no se encontro el productos");
       return;
     }
-    res.status(200).json(resp);
+    res.render("filterProducts",{resp, user: user, nombre});
   } catch (error) {
     res.status(500).json(error.message);
   }

@@ -12,15 +12,13 @@ const {
 
 route.get("/", getAllProducts);
 
-route.get("/get-by-product/:nombre", getproductByName);
+route.post("/get-by-product", getproductByName);
 
 route.get("/get-by-id/:id", getProductById);
 
 route.post("/create-products", createProducts);
 route.get("/add", (req, res) => {
   const logueado = req.session;
-  console.log(logueado);
-
   res.render("addProducts", {
     title: "Añadir Producto",
   });
