@@ -26,27 +26,28 @@ Información sobre el usuario administrador:
 Instrucciones para instalar o ejecutar el proyecto en un entorno local. Por ejemplo:
 
 1. Clona este repositorio: `git clone https://github.com/IgnacioVelazquez92/backexpress-hbs.git`
-2. Navega hasta el directorio del proyecto: `cd nombre-del-directorio`
+2. Navega hasta el directorio del proyecto: `cd backexpress-hbs`
+3. introduce el comando `npm install`
 
 
 ## Uso
 
-Pasos o instrucciones para utilizar o probar el proyecto una vez instalado. Por ejemplo:
+Pasos o instrucciones para utilizar o probar el proyecto una vez instalado. 
 
 1. Ejecuta el comando `npm start`
-2. Abre tu navegador y ve a `http://localhost:8080`
-3. Necesitas configurar tus propias variables de entorno.
+2. Necesitas configurar tus propias variables de entorno.
       PORT=8080
       URL_DB= url mongo db
       SECRET=key de JWT
       EMAIL_PASS= clave para nodemailer y tu servicio de email
       EMAIL_USER= correo eléctronico
       SESSION_SECRET= clave para express sessión
+3. Abre tu navegador y ve a `http://localhost:8080`
 
 ## Contacto
 
 si tienes preguntas o comentarios sobre el proyecto, no dudes en contactarme a través de mis redes sociales:
 
-- Twitter: [MiUsuarioTwitter](https://twitter.com/Ignacio_V10)
-- LinkedIn: [MiPerfilLinkedIn](https://www.linkedin.com/in/omar-ignacio-velazquez-44499414a/)
+- [Twitter](https://twitter.com/Ignacio_V10)
+- [Linkedin](https://www.linkedin.com/in/omar-ignacio-velazquez-44499414a/)
 
