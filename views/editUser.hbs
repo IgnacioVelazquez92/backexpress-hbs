@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <h1 class="text-center mb-4">Editar usuario</h1>
+      <form id="editProductForm" method="POST" action="/user/edit-user/{{resp._id}}">
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="name" name="name" required value="{{resp.name}}" />
+        </div>
+
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="lastName" name="lastName" value="{{resp.lastName}}" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="text" class="form-control" id="email" name="email" value="{{resp.email}}" required />
+        </div>
+
+
+        <!-- Deshabilitar usuario -->
+        <div class="mb-3 form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="disabled" name="disabled" {{#if resp.disabled}} checked
+            {{/if}} />
+          <label class="form-check-label" for="inStock">¿Deshabilitar?</label>
+        </div>
+
+        <!-- Switch para indicar si es administrador -->
+        <div class="mb-3 form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="isAdmin" name="isAdmin" {{#if resp.isAdmin}} checked
+            {{/if}} />
+          <label class="form-check-label" for="inStock">¿Es administrador?</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const checkDisabled = document.getElementById('disabled');
+  const checkAdmin = document.getElementById('isAdmin');
+
+  checkDisabled.addEventListener('change', (event) => {
+    checkDisabled.toggleAttribute('checked');
+
+    checkDisabled.value = checkDisabled.checked;
+    console.log(checkDisabled, checkDisabled.value)
+  });
+
+  checkAdmin.addEventListener('change', (event) => {
+    checkAdmin.toggleAttribute('checked');
+
+    checkAdmin.value = checkAdmin.checked;
+    console.log(checkAdmin, checkAdmin.value)
+  });
+</script>

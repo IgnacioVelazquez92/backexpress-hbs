@@ -6,14 +6,15 @@ const {
   createUser,
   editUser,
   deleteUser,
-  disableUser,
   editUserMail,
-  isAdministrator,
+  getAllUser,
+  renderEditUser
 } = require("../controllers/user.controllers");
 const { emailValidation } = require("../helpers/user.validations");
 const { jwtvalidator } = require("../middleware/jwtValidation");
 
 route.get("/get-by-name/:name", getUserByName);
+route.get("/get-all-user", getAllUser);
 
 route.post(
   "/create-user",
@@ -44,7 +45,7 @@ route.post(
   createUser
 );
 
-route.patch(
+route.post(
   "/edit-user/:id",
   jwtvalidator,
   body("email")
@@ -54,9 +55,6 @@ route.patch(
     .isEmpty()
     .withMessage("el campo email no puede estar vacio")
     .custom(emailValidation),
-  body("password")
-    .matches(/^[A-Za-z0-9]{8,16}$/)
-    .withMessage("La contraseña no cumple con los requisitos"),
   body("name")
     .not()
     .isEmpty()
@@ -73,6 +71,22 @@ route.patch(
     .trim(),
   editUser
 );
+
+
+route.get(
+  "/edit-user/:id",renderEditUser
+);
+
+
+route.get("/delete-user/:id",
+jwtvalidator,
+deleteUser);
+
+route.get("/iniciar-sesion", (req, res) => {
+  res.render("registro", {
+    title: "registro",
+  });
+});
 
 route.patch(
   "/edit-mail-user/:id",
@@ -104,16 +118,5 @@ route.patch(
   editUserMail
 );
 
-route.patch("/disable-user/:id/:disabled", disableUser);
-
-route.patch("/isAdmin-user/:id/:isAdmin", isAdministrator);
-
-route.delete("/delete-user/:id", deleteUser);
-
-route.get("/iniciar-sesion", (req, res) => {
-  res.render("registro", {
-    title: "registro",
-  });
-});
 
 module.exports = route;

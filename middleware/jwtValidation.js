@@ -2,15 +2,17 @@ const jwt = require("jsonwebtoken");
 
 const jwtvalidator = async (req, res, next) => {
   try {
-    const token = req.headers["access-token"];
+    const user = req.session.userData;
+    const token = user.token
 
-    if (!token) return res.status(400).json("token inexistente");
+    if (!token) return res.render("errorPage",{msg: "No cuenta con los permisos necesarios"});;
     jwt.verify(token, process.env.SECRET, (error) => {
-      if (error) return res.status(401).json("token invalido");
+      if (error) return res.render("errorPage",{msg: "No cuenta con los permisos necesarios"});
       next();
     });
+    // next()
   } catch (error) {
-    res.status(500).json(error.message);
+    res.render("errorPage",{msg: "Ups.. algo fallo, intentelo más tarde"});
   }
 };
 

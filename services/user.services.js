@@ -2,6 +2,16 @@ const User = require("../models/user.model");
 
 //Servicios a la base de datos:
 
+
+const obtenerTodosLosUsuarios = async () => {
+  return await User.find({}).lean();
+};
+
+const obtenerPorId = async (id) => {
+  console.log("en el service llega: ", id);
+  return await User.findOne({_id:id}).lean();
+};
+
 const buscarPorEmail = async (email) => {
   return await User.findOne({ email });
 };
@@ -31,4 +41,6 @@ module.exports = {
   eliminarUsuario,
   buscarPorEmail,
   obtenerUsuarioPorNombre,
+  obtenerTodosLosUsuarios,
+  obtenerPorId
 };

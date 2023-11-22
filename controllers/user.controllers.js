@@ -8,7 +8,21 @@ const {
   eliminarUsuario,
   buscarPorEmail,
   obtenerUsuarioPorNombre,
+  obtenerTodosLosUsuarios,
+  obtenerPorId
 } = require("../services/user.services");
+
+const getAllUser = async (req, res) => {
+  try {
+    const resp = await obtenerTodosLosUsuarios();
+    if (!resp) {
+      return res.render("errorPage",{msg: "No hay usuarios"});
+    }
+    res.render("tableUsers",{resp})
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
 
 const getUserByName = async (req, res) => {
   try {
@@ -79,17 +93,41 @@ const editUser = async (req, res) => {
     const { id } = req.params;
     const userData = req.body;
 
+    if(userData.disabled=="on"){
+      userData.disabled=true
+    }
+    if(!userData.disabled){
+      userData.disabled=false
+    }
+
+    if(userData.isAdmin=="on"){
+      userData.isAdmin=true
+    }
+    if(!userData.isAdmin){
+      userData.isAdmin=false
+    }
+
     const resp = await editarUsuarios(id, userData);
 
     if (!resp)
-      return res.status(404).json({
-        msg: "Ups.. algo fallo, intentelo más tarde",
-        msgDev: "usuario no encontrado",
-      });
+    return res.render("errorPage",{msg: "Ups.. algo fallo, intentelo más tarde"});
 
-    res.status(200).json({ msg: "modificado con exito", resp });
+    res.redirect("/user/get-all-user");
   } catch (error) {
-    res.status(500).json({ msg: error.message });
+    res.render("errorPage",{msg: error.message});
+  }
+};
+
+const renderEditUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const resp = await obtenerPorId(id);
+    if (!resp)
+      return res.render("errorPage",{msg: "Ups.. algo fallo, intentelo más tarde"});
+    res.render("editUser",{resp });
+  } catch (error) {
+    res.render("errorPage",{msg: error.message});
   }
 };
 
@@ -115,44 +153,18 @@ const editUserMail = async (req, res) => {
   }
 };
 
-const disableUser = async (req, res) => {
-  try {
-    const { id, disabled } = req.params;
-
-    const resp = await editarUsuarios(id, { disabled });
-    console.log(disabled);
-    if (!resp) return res.status(404).json("Usuario no encontrado");
-
-    res.status(200).json(resp);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-};
-
-const isAdministrator = async (req, res) => {
-  try {
-    const { id, isAdmin } = req.params;
-    console.log(isAdmin);
-    const resp = await editarUsuarios(id, { isAdmin });
-    if (!resp) return res.status(404).json("Usuario no encontrado");
-
-    res.status(200).json(resp);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-};
 
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     const resp = await eliminarUsuario(id);
     if (!resp) {
-      res.status(404).json("no se encontro el usuario");
+      res.render("errorPage",{mgs:"no se encontro el usuario"});
       return;
     }
-    res.status(200).json("se elimino el usuario");
+    res.redirect("/user/get-all-user")
   } catch (error) {
-    res.status(500).json(error.message);
+    res.render("errorPage",{msg: error.message});
   }
 };
 
@@ -161,7 +173,7 @@ module.exports = {
   createUser,
   editUser,
   editUserMail,
-  disableUser,
   deleteUser,
-  isAdministrator,
+  getAllUser,
+  renderEditUser
 };
