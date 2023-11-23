@@ -5,29 +5,28 @@
     {{#each resp}}
     {{#if ../user.isAdmin}}
     <!-- Muestra todos los productos al administrador -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100 d-flex flex-column justify-content-between" style="width: 20rem;">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+      <div class="card h-100">
         <img src="{{this.img}}" class="card-img-top" alt="{{this.title}}">
-        <div class="card-body d-flex flex-column justify-content-between">
+        <div class="card-body">
           <h5 class="card-title">{{this.title}}</h5>
           <p class="card-text overflow-auto">{{this.description}}</p>
           <p class="card-text">Precio: ${{this.price}}</p>
           <div class="d-flex justify-content-evenly">
-            <a href="/edit-products/{{this._id}}" class="btn btn-secondary my-2 flex-shrink-1">Editar</a>
-            <a href="/delete-products/{{this._id}}" class="btn btn-danger my-2 flex-shrink-1">Eliminar</a>
-            <a href="#" class="btn btn-primary my-2 flex-shrink-2">Comprar</a>
+            <a href="/edit-products/{{this._id}}" class="btn btn-secondary my-2">Editar</a>
+            <a href="/delete-products/{{this._id}}" class="btn btn-danger my-2">Eliminar</a>
+            <a href="#" class="btn btn-primary my-2">Comprar</a>
           </div>
-
         </div>
       </div>
     </div>
     {{else}}
     {{#if this.inStock}}
     <!-- Muestra solo los productos en stock para los clientes -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100" style="width: 18rem;">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+      <div class="card h-100">
         <img src="{{this.img}}" class="card-img-top" alt="{{this.title}}">
-        <div class="card-body d-flex flex-column justify-content-between">
+        <div class="card-body">
           <h5 class="card-title">{{this.title}}</h5>
           <p class="card-text overflow-auto">{{this.description}}</p>
           <p class="card-text">Precio: ${{this.price}}</p>

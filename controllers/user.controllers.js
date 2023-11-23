@@ -131,27 +131,6 @@ const renderEditUser = async (req, res) => {
   }
 };
 
-const editUserMail = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const userData = req.body;
-
-    const saltRound = bcrypt.genSaltSync(10);
-    userData.password = bcrypt.hashSync(userData.password, saltRound);
-
-    const resp = await editarUsuarios(id, userData);
-
-    if (!resp)
-      return res.status(404).json({
-        msg: "Ups.. algo fallo, intentelo más tarde",
-        msgDev: "usuario no encontrado",
-      });
-
-    res.status(200).json({ msg: "modificado con exito", resp });
-  } catch (error) {
-    res.status(500).json({ msg: error.message });
-  }
-};
 
 
 const deleteUser = async (req, res) => {
@@ -172,7 +151,6 @@ module.exports = {
   getUserByName,
   createUser,
   editUser,
-  editUserMail,
   deleteUser,
   getAllUser,
   renderEditUser

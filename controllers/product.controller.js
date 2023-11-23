@@ -20,17 +20,6 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-const getProductById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const resp = await getProductByIdService(id);
-    if (!resp)
-      return res.render("errorPage",{msg: "El producto  no se ha encontrado"});
-    res.status(200).json(resp);
-  } catch (error) {
-    res.render("errorPage",{msg: error.message});
-  }
-};
 
 const createProducts = async (req, res) => {
   try {
@@ -109,7 +98,6 @@ const getproductByName = async (req, res) => {
 
 module.exports = {
   getAllProducts,
-  getProductById,
   createProducts,
   editProducts,
   deleteProducts,

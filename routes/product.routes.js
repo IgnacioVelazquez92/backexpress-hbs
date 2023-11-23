@@ -2,7 +2,6 @@ const { Router } = require("express");
 const route = Router();
 const {
   getAllProducts,
-  getProductById,
   createProducts,
   editProducts,
   deleteProducts,
@@ -14,13 +13,19 @@ route.get("/", getAllProducts);
 
 route.post("/get-by-product", getproductByName);
 
-route.get("/get-by-id/:id", getProductById);
 
 route.post("/create-products", createProducts);
 route.get("/add", (req, res) => {
   const logueado = req.session;
   res.render("addProducts", {
     title: "Añadir Producto",
+  });
+});
+
+route.get("/servicios", (req, res) => {
+  const logueado = req.session;
+  res.render("Servicios", {
+    title: "Servicios",
   });
 });
 
