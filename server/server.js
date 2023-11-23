@@ -51,12 +51,15 @@ app.use("/user", userRoutes);
 app.use("/login", loginAuth);
 app.use("/", productsRoutes);
 
+// Middleware para manejar rutas no encontradas (404)
+app.use((req, res) => {
+  res.status(404).render('error404'); 
+});
+
 app.get("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      // Manejo del error si ocurre
-      console.error(err);
-      return res.status(500).send("Error al cerrar sesión");
+  req.session.destroy((error) => {
+    if (error) {
+      res.render("errorPage",{msg: error.message});
     }
     res.redirect("/"); // Redirigir a la página de inicio de sesión, por ejemplo
   });

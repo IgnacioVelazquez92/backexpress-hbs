@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-8">
+        <img src="{{resp.img}}" class="img-fluid rounded-start" alt="{{resp.title}}">
+      </div>
+      <div class="col-md-4">
+        <div class="card-body">
+          <h1 class="card-title">{{resp.title}}</h1>
+          <p class="h4 card-text">{{resp.description}}</p>
+          <p class="card-text"><small class="text-body-secondary">Categoría: {{resp.category}}</small></p>
+          <p class="h3 card-text">${{resp.price}}</p>
+          <div class="mt-auto">
+            <a id="comprarProducto" class="btn btn-success btn-lg btn-block mt-3">Comprar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  const compra = document.getElementById('comprarProducto');
+
+  compra.addEventListener('click', () => {
+
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Compra finalizada con éxito",
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+  });
+
+</script>

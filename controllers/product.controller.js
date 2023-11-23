@@ -52,6 +52,19 @@ const editProducts = async (req, res) => {
   }
 };
 
+const detailsProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const resp = await getProductByIdService(id);
+    if (!resp) return res.render("errorPage",{msg: "El producto  no se ha encontrado"});
+    res.render("detailsProduct", { resp });
+  } catch (error) {
+
+    res.render("errorPage",{msg: error.message});
+
+  }
+};
+
 const renderEditProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -103,4 +116,5 @@ module.exports = {
   deleteProducts,
   getproductByName,
   renderEditProduct,
+  detailsProducts
 };

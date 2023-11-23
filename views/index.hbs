@@ -15,7 +15,7 @@
           <div class="d-flex justify-content-evenly">
             <a href="/edit-products/{{this._id}}" class="btn btn-secondary my-2">Editar</a>
             <a href="/delete-products/{{this._id}}" class="btn btn-danger my-2">Eliminar</a>
-            <a href="#" class="btn btn-primary my-2">Comprar</a>
+            <a href="/details-products/{{this._id}}" class="btn btn-primary my-2">Ver detalle</a>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
           <h5 class="card-title">{{this.title}}</h5>
           <p class="card-text overflow-auto">{{this.description}}</p>
           <p class="card-text">Precio: ${{this.price}}</p>
-          <a href="#" class="btn btn-primary">Comprar</a>
+          <a href="/details-products/{{this._id}}" class="btn btn-primary my-2">Ver detalle</a>
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ const {
   deleteProducts,
   getproductByName,
   renderEditProduct,
+  detailsProducts
 } = require("../controllers/product.controller");
 
 route.get("/", getAllProducts);
@@ -31,7 +32,7 @@ route.get("/servicios", (req, res) => {
 
 route.post("/edit-products/:id", editProducts);
 route.get("/edit-products/:id", renderEditProduct);
-
 route.get("/delete-products/:id", deleteProducts);
+route.get("/details-products/:id", detailsProducts);
 
 module.exports = route;
